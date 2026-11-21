@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shockproof. Create desire through disruption</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500&family=Cabin:wght@700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/tweenwind@0.2.0"></script>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #181713;
+    color: #f1f1f1;
+    font: 14px/20px "Archivo", sans-serif;
+    overflow: hidden;
+  }
+
+  .hero {
+    --inset-y: 23.4vh;
+    --inset-x: calc(50vw - 29.4vh);
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .nav {
+    visibility: hidden;
+  }
+
+  .logo {
+    position: fixed;
+    top: 2vw;
+    left: 2vw;
+    z-index: 10;
+    color: #fff;
+    font: 700 1.75vw/1 "Cabin", sans-serif;
+    text-decoration: none;
+    mix-blend-mode: difference;
+    transform: translateY(-300%);
+  }
+
+  .links {
+    position: fixed;
+    top: 2vw;
+    right: 2vw;
+    z-index: 10;
+    display: flex;
+    gap: 0.75vw;
+    transform: translateY(-300%);
+  }
+
+  .button {
+    display: flex;
+    align-items: center;
+    height: 2vw;
+    padding: 0.1vw 0.5vw 0 0.4vw;
+    border: 1px solid #181713;
+    border-radius: 0.6vw;
+    background: #f1f1f1cf;
+    backdrop-filter: blur(40px);
+    color: #000;
+    font: 500 1.25vw/1vw "Archivo", sans-serif;
+    letter-spacing: -0.07em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .layer {
+    position: absolute;
+    inset: 0;
+  }
+
+  .bottom {
+    z-index: 1;
+    background: #181713;
+  }
+
+  .top {
+    z-index: 5;
+    background: #000;
+    filter: hue-rotate(180deg) invert(1);
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+
+  .frame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 0;
+    height: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  .photos {
+    position: absolute;
+    inset: 0;
+  }
+
+  .photo {
+    position: absolute;
+    inset: 0;
+    overflow: clip;
+    opacity: 0;
+    box-shadow: 0 0 0 15em #181713;
+  }
+
+  .photo:first-child {
+    opacity: 1;
+  }
+
+  .photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .photo:first-child img {
+    clip-path: inset(100% 0 0 0);
+  }
+
+  .video {
+    position: absolute;
+    z-index: 2;
+    flex: none;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+  }
+
+  .video-clip {
+    --burst: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: inset(calc((1 - var(--burst)) * var(--inset-y)) calc((1 - var(--burst)) * var(--inset-x)));
+  }
+
+  .video-clip video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .word {
+    position: absolute;
+    color: #f1f1f1;
+    font: 700 2.35vw/1 "Cabin", sans-serif;
+    white-space: nowrap;
+  }
+
+  .word span {
+    display: block;
+  }
+
+  .word-left {
+    top: 0;
+    left: 0;
+    transform: translate(-100%, -50%);
+  }
+
+  .word-right {
+    right: 0;
+    bottom: 0;
+    transform: translate(100%, 45%);
+  }
+
+  .shade {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    height: 30vw;
+    background: linear-gradient(#0000, #000);
+    opacity: 0.9;
+    transform: scaleY(0);
+    transform-origin: 50% 100%;
+  }
+
+  .headline {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    padding: 0 2vw 2vw;
+  }
+
+  .mask {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+  }
+
+  .create {
+    top: 0.2vw;
+    left: 22.4vw;
+  }
+
+  .desire {
+    left: 5vw;
+  }
+
+  .through {
+    left: 30.6vw;
+  }
+
+  .disruption {
+    left: 37.4vw;
+  }
+
+  .big {
+    display: block;
+    padding: 1vw 0.5vw 0.2vw 0;
+    font-size: 7.9vw;
+    font-weight: 400;
+    line-height: 6.08vw;
+    letter-spacing: -0.09em;
+    text-transform: uppercase;
+  }
+
+  .grey {
+    color: #acacac;
+  }
+
+  .from-left {
+    transform: translateX(-105%);
+  }
+
+  .from-right {
+    transform: translateX(105%);
+  }
+
+  .top .headline {
+    z-index: 0;
+  }
+
+  .top-video {
+    --burst: 0;
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    mix-blend-mode: multiply;
+    clip-path: inset(calc((1 - var(--burst)) * var(--inset-y)) calc((1 - var(--burst)) * var(--inset-x)));
+  }
+
+  .top-video video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .top .create,
+  .top .desire {
+    opacity: 0.7;
+  }
+
+  .top .through,
+  .top .disruption {
+    opacity: 0.4;
+  }
+
+  @media (min-width: 1920px) {
+    .big {
+      padding: 1vh 1vh 0.2vw 0;
+      font-size: 13.5vh;
+      line-height: 10vh;
+    }
+
+    .word {
+      font-size: 4.4vh;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .logo {
+      top: 4vw;
+      font-size: 2.4vw;
+    }
+
+    .links {
+      top: 4vw;
+    }
+
+    .button {
+      height: 3vw;
+      padding: 0.3vw 0.6vw 0;
+      border-radius: 1vw;
+      font-size: 2.1vw;
+      line-height: 2vw;
+    }
+
+    .create {
+      top: 0.4vw;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .hero {
+      --inset-y: calc(50vh - 42vw);
+      --inset-x: 20.6vw;
+      height: 100svh;
+    }
+
+    .logo {
+      top: 6vw;
+      left: 4vw;
+      font-size: 5.9vw;
+    }
+
+    .links {
+      top: 5vw;
+      right: 4vw;
+      gap: 2vw;
+    }
+
+    .button {
+      height: 7vw;
+      padding: 0.3vw 1.4vw 0;
+      border-radius: 1.6vw;
+      font-size: 4.2vw;
+      line-height: 4vw;
+    }
+
+    .word {
+      font-size: 5.3vw;
+    }
+
+    .headline {
+      padding-bottom: 7vw;
+    }
+
+    .row:first-child,
+    .row:last-child {
+      display: flex;
+    }
+
+    .big {
+      font-size: 13.5vw;
+      line-height: 10.4vw;
+    }
+
+    .create {
+      top: -0.3vw;
+      left: 8.5vw;
+    }
+
+    .desire {
+      left: 1.5vw;
+    }
+
+    .disruption {
+      left: 21.4vw;
+    }
+  }
+</style>
+</head>
+<body>
+  <header class="hero load:gs-timeline load:gs-duration-0.7 load:gs-ease-[0.44,0.01,0,1]">
+    <nav class="nav gs-to-[autoAlpha:1] gs-duration-0.01 gs-at-[4.34]">
+      <a class="logo gs-to-[y:0] gs-duration-1 gs-ease-[0.53,0.02,0,0.99] gs-at-[4.34]" href="#">SHOCKPROOF</a>
+      <div class="links gs-to-[y:0] gs-duration-1 gs-ease-[0.53,0.02,0,0.99] gs-at-[4.34]">
+        <a class="button" href="#">Work</a>
+        <a class="button" href="#">About</a>
+        <a class="button" href="#">News</a>
+      </div>
+    </nav>
+    <div class="layer bottom">
+      <div class="grow gs-target-[.frame] gs-to-[width:28vh,height:20.3vh] max-[479px]:gs-to-[width:28vw,height:20.3vw] gs-at-[0.75]">
+        <div class="grow gs-target-[.frame] gs-to-[width:30.8vh,height:30.8vh] max-[479px]:gs-to-[width:30.8vw,height:30.8vw] gs-at-[1.45]">
+          <div class="grow gs-target-[.frame] gs-to-[width:51.1vh,height:39.2vh] max-[479px]:gs-to-[width:51.1vw,height:63vw] gs-at-[2.15]">
+            <div class="grow gs-target-[.frame] gs-to-[width:58.8vh,height:53.2vh] max-[479px]:gs-to-[width:58.8vw,height:84vw] gs-at-[2.85]">
+              <div class="frame">
+                <div class="photos gs-from-[y:25vh] gs-duration-1.2 gs-at-[0.55]">
+                  <div class="photo"><img class="gs-to-[clipPath:inset(0%_0px_0px_0px)] gs-duration-1 gs-at-[0.55]" src="https://assets.lummi.ai/assets/QmYyEnMwHSbFkmiJuCiszWnBHiAeq4c3LkysnwJhTj2WsT?fm=jpg&w=1100" alt=""></div>
+                  <div class="photo gs-to-[opacity:1] gs-duration-0.01 gs-at-[1.55]"><img src="https://assets.lummi.ai/assets/QmaP5YsVUqgEstJ1F3aZmmqrKmrSHeKLnw6KHnotejATfR?fm=jpg&w=1100" alt=""></div>
+                  <div class="photo gs-to-[opacity:1] gs-duration-0.01 gs-at-[1.8]"><img src="https://assets.lummi.ai/assets/QmWW1ifyBsXGmor3ahjnSuZ27NRWgFFJ9LgfweedcwhTrE?fm=jpg&w=1100" alt=""></div>
+                  <div class="photo gs-to-[opacity:1] gs-duration-0.01 gs-at-[2.15]"><img src="https://assets.lummi.ai/assets/QmaAzHcGA5yRbH8y5fPqsdSuuAcjrFsRojuNKtsy1Y3qA9?fm=jpg&w=1100" alt=""></div>
+                  <div class="photo gs-to-[opacity:1] gs-duration-0.01 gs-at-[2.325]"><img src="https://assets.lummi.ai/assets/QmeR1uQndqiZ8dvtSgbAC5brD1isMQ2GTC2xeVuBfmsyvK?fm=jpg&w=1100" alt=""></div>
+                  <div class="photo gs-to-[opacity:1] gs-duration-0.01 gs-at-[2.5]"><img src="https://assets.lummi.ai/assets/QmVeM5Xs9s8vA47nNncS2f8wNJE1P2gTN4ySEJDU4Cb417?fm=jpg&w=1100" alt=""></div>
+                  <div class="photo gs-to-[opacity:1] gs-duration-0.01 gs-at-[2.675]"><img src="https://assets.lummi.ai/assets/QmRWrXUJvjSBYGN1LW7onsBMovegsw69e7UKQV5ckBmRfY?fm=jpg&w=1100" alt=""></div>
+                  <div class="photo gs-to-[opacity:1] gs-duration-0.01 gs-at-[2.85]"><img src="https://assets.lummi.ai/assets/QmUdkkqLHUgwzsiHZGBLu1Nzobc4Xam229C5a8GAWMWugg?fm=jpg&w=1100" alt=""></div>
+                  <div class="photo gs-to-[opacity:1] gs-duration-0.01 gs-at-[2.99]"><img src="https://assets.lummi.ai/assets/QmWogeFxnBgTuEq5oSecSQHWcaAe2pKWAZT2YnaCMK2E84?fm=jpg&w=1100" alt=""></div>
+                  <div class="photo gs-to-[opacity:1] gs-duration-0.01 gs-at-[3.13]"><img src="https://assets.lummi.ai/assets/QmRoxFeWkLpHXGh97QF5vtiqDkMizFBHLs2NqPzEdGeUWR?fm=jpg&w=1100" alt=""></div>
+                  <div class="photo gs-to-[opacity:1] gs-duration-0.01 gs-at-[3.27]"><img src="https://assets.lummi.ai/assets/QmPTQCqyA1UVH7RSFVFZHNaTtrcufUHivfBqd47MZfigrw?fm=jpg&w=1100" alt=""></div>
+                  <div class="photo gs-to-[opacity:1] gs-duration-0.01 gs-at-[3.41]"><img src="https://assets.lummi.ai/assets/QmUHccwzcT92YB6VTCzzPALYJM4qzVPmjBLk4KJ4XDSXxD?fm=jpg&w=1100" alt=""></div>
+                  <div class="photo gs-to-[opacity:1] gs-duration-0.01 gs-at-[3.55]"><img src="https://assets.lummi.ai/assets/QmRArZ6QinpGc1So8jzo5ksYsJNpAW1QP9Fv8wko99gB33?fm=jpg&w=1100" alt=""></div>
+                  <div class="photo gs-to-[opacity:1] gs-duration-0.01 gs-at-[3.66]"><img src="https://assets.lummi.ai/assets/QmeVv8fLuYrCuRgU4nGYqDCifZVmP4Z9U3c2dWD4YSGfYk?fm=jpg&w=1100" alt=""></div>
+                  <div class="photo gs-to-[opacity:1] gs-duration-0.01 gs-at-[3.782]"><img src="https://assets.lummi.ai/assets/QmWqTA3mbEcQMBtj2r6HP1DvAjqMCDAdjKriRAb6wwqGoj?fm=jpg&w=1100" alt=""></div>
+                  <div class="photo gs-to-[opacity:1] gs-duration-0.01 gs-at-[3.9]"><img src="https://assets.lummi.ai/assets/QmPcmA7YkToEnpQRc4E1bts8CKBoKHdA422gwZ3LZR5JWJ?fm=jpg&w=1100" alt=""></div>
+                  <div class="photo gs-to-[opacity:1] gs-duration-0.01 gs-at-[4.01]"><img src="https://assets.lummi.ai/assets/QmNbPCTeJzkvuGxrHMuSGkonecoy2prUei7d8iL1NyngEf?fm=jpg&w=1100" alt=""></div>
+                  <div class="photo gs-to-[opacity:1] gs-duration-0.01 gs-at-[4.14]"><img src="https://assets.lummi.ai/assets/QmbT3naf6RqyYPse4HQQW7dRr5TsskbNP84VTynvzA3Jud?fm=jpg&w=1100" alt=""></div>
+                </div>
+                <div class="video gs-to-[opacity:1] gs-duration-0.01 gs-at-[4.24]">
+                  <div class="video-clip gs-to-[--burst:1] gs-duration-1.3 gs-ease-[0.53,0.02,0,0.99] gs-at-[4.24]">
+                    <video src="https://assets.mixkit.co/videos/1038/1038-720.mp4" poster="https://assets.mixkit.co/videos/1038/1038-thumb-720-0.jpg" autoplay muted loop playsinline></video>
+                  </div>
+                </div>
+                <div class="word word-left gs-to-[xPercent:400,yPercent:500] gs-duration-1.3 gs-ease-[0.53,0.02,0,0.99] gs-at-[4.34]"><span class="gs-to-[yPercent:-100] gs-duration-0.6 gs-at-[0.75]">SHOCK</span></div>
+                <div class="word word-right gs-to-[xPercent:-400,yPercent:-500] gs-duration-1.3 gs-ease-[0.53,0.02,0,0.99] gs-at-[4.34]"><span class="gs-to-[yPercent:100] gs-duration-0.6 gs-at-[0.75]">PROOF</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="shade gs-to-[scaleY:1] gs-duration-1 gs-ease-[0.53,0.02,0,0.99] gs-at-[4.34]"></div>
+      <div class="headline">
+        <div class="row"><span class="mask create"><span class="big from-left grey gs-to-[x:0] gs-duration-1.3 gs-ease-[0.53,0.02,0,0.99] gs-at-[4.34]">Create</span></span></div>
+        <div class="row"><span class="mask desire"><span class="big from-right grey gs-to-[x:0] gs-duration-1.3 gs-ease-[0.53,0.02,0,0.99] gs-at-[4.34]">Desire</span></span><span class="mask through"><span class="big from-left gs-to-[x:0] gs-duration-1.3 gs-ease-[0.53,0.02,0,0.99] gs-at-[4.34]">through</span></span></div>
+        <div class="row"><span class="mask disruption"><span class="big from-right gs-to-[x:0] gs-duration-1.3 gs-ease-[0.53,0.02,0,0.99] gs-at-[4.34]">Disruption</span></span></div>
+      </div>
+    </div>
+    <div class="layer top">
+      <div class="headline">
+        <div class="row"><span class="mask create"><span class="big from-left grey gs-to-[x:0] gs-duration-1.3 gs-ease-[0.53,0.02,0,0.99] gs-at-[4.34]">Create</span></span></div>
+        <div class="row"><span class="mask desire"><span class="big from-right grey gs-to-[x:0] gs-duration-1.3 gs-ease-[0.53,0.02,0,0.99] gs-at-[4.34]">Desire</span></span><span class="mask through"><span class="big from-left gs-to-[x:0] gs-duration-1.3 gs-ease-[0.53,0.02,0,0.99] gs-at-[4.34]">through</span></span></div>
+        <div class="row"><span class="mask disruption"><span class="big from-right gs-to-[x:0] gs-duration-1.3 gs-ease-[0.53,0.02,0,0.99] gs-at-[4.34]">Disruption</span></span></div>
+      </div>
+      <div class="top-video gs-to-[--burst:1] gs-duration-1.3 gs-ease-[0.53,0.02,0,0.99] gs-at-[4.24]">
+        <video src="https://assets.mixkit.co/videos/1038/1038-720.mp4" poster="https://assets.mixkit.co/videos/1038/1038-thumb-720-0.jpg" autoplay muted loop playsinline></video>
+      </div>
+    </div>
+  </header>
+</body>
+</html>
